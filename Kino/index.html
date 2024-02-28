@@ -15,7 +15,8 @@
                 <option value="Matrix">Matrix</option>
                 <option value="HarryPotter">Harry Potter</option>
                 <option value="StarWars">Star Wars</option>
-                <option value="Star sdsssd">Star sdsssd</option>
+                <option value="SS">SS</option>
+                <option value="lel">lel</option>
             </select>
         </div>
         <div id="seats"></div>
@@ -23,9 +24,10 @@
             <input type="text" id="firstName" placeholder="Jméno">
             <input type="text" id="lastName" placeholder="Příjmení">
             <button id="reserveButton">Zarezervovat</button>
-            <button id="resetButton">SMAZAT ZÁZNAMY</button>
+            <button onclick="window.location.href = 'admin.html';" id="adminPageBtn">Admin Page</button>
         </div>
         <div id="reservationBox"></div> <!-- Univerzální div pro zobrazení rezervací všech filmů -->
+        
     </div>
     
     <div id="reservationPopup" onmouseenter="clearTimeout(popupTimeout)" onmouseleave="hideReservationPopup()"></div> <!-- Div pro zobrazení popupu -->

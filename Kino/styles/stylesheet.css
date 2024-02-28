@@ -115,3 +115,7 @@ h1{
     height: 15px;
     top: 50px; /* Posunutí o 50px výše */
 }
+
+#zpet{
+    background-color: aqua;
+}

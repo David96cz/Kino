@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 let reserveButton = document.getElementById('reserveButton');
 let resetButton = document.getElementById('resetButton');
+let adminButton = document.getElementById('adminPageBtn');
 
 let currentFilm = '';
 let popupTimeout; // Proměnná pro uchování ID timeoutu
@@ -47,7 +48,9 @@ function loadReservedSeats(selectedFilm) {
     if (output !== null) {
         output.innerHTML = ''; // Vyčištění obsahu divu před načtením nových rezervací
 
-        const films = ['Matrix', 'HarryPotter', 'StarWars'];
+        const filmsSelect = document.getElementById('film');
+        const films = Array.from(filmsSelect.options).map(option => option.value);
+        
         films.forEach(film => {
             const filmReservations = JSON.parse(localStorage.getItem(film)) || [];
 
@@ -61,6 +64,7 @@ function loadReservedSeats(selectedFilm) {
         console.error('Kontejner pro zobrazení rezervací nenalezen.');
     }
 }
+
 
 function loadAllReservedSeats() {
     const output = document.getElementById('reservationBox');
@@ -226,5 +230,15 @@ resetButton.onclick = function() {
         location.reload();
     } else {
         alert('Nesprávné heslo. Záznamy nebyly smazány.');
+    }
+}
+
+adminButton.onclick = function(){
+    const adminPassword = prompt('Zadejte heslo administrátora:');
+    
+    if (adminPassword === 'heslo') {
+        window.location.href = 'admin.html';
+    } else {
+        alert('Nesprávné heslo.');
     }
 }
