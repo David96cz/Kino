@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/stylesheet.css">
-    <link rel="script" href="scripts/script.js">
     <title>Kino rezervace</title>
 </head>
 <body id="background">
@@ -16,14 +15,15 @@
                 <option value="Matrix">Matrix</option>
                 <option value="HarryPotter">Harry Potter</option>
                 <option value="StarWars">Star Wars</option>
+                <option value="Star sdsssd">Star sdsssd</option>
             </select>
         </div>
         <div id="seats"></div>
         <div id="inputs">
             <input type="text" id="firstName" placeholder="Jméno">
             <input type="text" id="lastName" placeholder="Příjmení">
-            <button id="reserveButton" onclick="reserveSeats()">Zarezervovat</button>
-            <button id="resetButton" onclick="resetPage()">SMAZAT ZÁZNAMY</button>
+            <button id="reserveButton">Zarezervovat</button>
+            <button id="resetButton">SMAZAT ZÁZNAMY</button>
         </div>
         <div id="reservationBox"></div> <!-- Univerzální div pro zobrazení rezervací všech filmů -->
     </div>
@@ -31,5 +31,6 @@
     <div id="reservationPopup" onmouseenter="clearTimeout(popupTimeout)" onmouseleave="hideReservationPopup()"></div> <!-- Div pro zobrazení popupu -->
 
   </div>
+  <script src="scripts/script.js"></script>
 </body>
 </html>
