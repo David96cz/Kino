@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#seats {
+    display: grid;
+    margin-top: 50px;
+    grid-template-columns: repeat(10, 45px); /* Deset sloupců s šířkou 30px */
+    grid-template-rows: repeat(7, 45px); /* Tři řady s výškou 40px */
+    gap: 5px;
+    justify-content: center;
+}
+
+.seat {
+    width: 40px;
+    height: 40px; /* Výška sedadla */
+    background-color: green;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: orange;
+}
+
+#inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#reserveButton {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#resetButton {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#output {
+    margin-top: 20px;
+    margin-left: 35px;
+}
+
+.reserved {
+    background-color: grey !important;
+    cursor: not-allowed !important;
+}
+
+#outerBox {
+    background-color: rgb(178, 248, 178);
+    border-radius: 20px;
+    width: 600px;
+    height: 800px;
+}
+
+#reservationBox {
+    background-color: rgb(243, 243, 243);
+    border-radius: 20px;
+    width: 560px;
+    min-height: 20px;
+    height: auto;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
+#background{
+  background-color: rgb(125, 243, 109);
+}
+
+h1{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  color: white; /* Barva textu */
+  text-shadow: 
+  -1px -1px 0 black,  
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black; /* Vytvoření obrysu */
+}
+
+#reservationPopup {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: auto; /* Nová šířka popupu */
+    height: 15px;
+    top: 50px; /* Posunutí o 50px výše */
+}
