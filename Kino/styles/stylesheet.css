@@ -69,12 +69,47 @@ input {
     cursor: not-allowed !important;
 }
 
-#outerBox {
+#outerBox, #adminBox {
     background-color: rgb(178, 248, 178);
     border-radius: 20px;
     width: 600px;
     height: 800px;
 }
+
+#adminBox {
+    display: inline-flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin-bottom: 100px;
+
+}
+
+#deleteButton{
+    background-color: red;
+    border-color: brown;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top: 25px;
+    width: 150px;
+    height: 50px;
+    transition: background-color 0.3s ease; /* Přidání přechodové animace */
+    
+}
+
+#deleteButton:hover {
+    background-color: rgba(167, 0, 0, 255); /* Ztmavení barvy při najetí myší */
+}
+
+
+#backBtnIndex {
+    margin-top: auto;
+    width: 150px;
+    height: 50px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+}
+
 
 #reservationBox {
     background-color: rgb(243, 243, 243);
