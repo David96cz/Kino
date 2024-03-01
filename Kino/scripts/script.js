@@ -4,31 +4,25 @@ let reserveButton = document.getElementById('reserveButton');
 let adminButton = document.getElementById('adminPageBtn');
 
 let currentFilm = '';
-let popupTimeout; // Proměnná pro uchování ID timeoutu
-let popupHovered = false; // Proměnná pro sledování, zda je kurzor na popupu
 
 function init() {
     document.getElementById('film').addEventListener('change', changeFilm);
-    loadAllReservedSeats();
+    loadReservedSeats();
     changeFilm();
 
-    // Přidání události pro sledování pohybu kurzoru nad popupem
     document.getElementById('reservationPopup').addEventListener('mouseenter', function() {
         popupHovered = true;
     });
 
-    // Přidání události pro sledování opuštění popupu kurzorem
     document.getElementById('reservationPopup').addEventListener('mouseleave', function() {
         popupHovered = false;
         planHideReservationPopup();
     });
 
-    // Přidání události pro sledování pohybu kurzoru nad tlačítkem
     document.getElementById('reserveButton').addEventListener('mouseenter', function() {
         clearTimeout(popupTimeout);
     });
 
-    // Přidání události pro sledování opuštění tlačítka kurzorem
     document.getElementById('reserveButton').addEventListener('mouseleave', function(event) {
         if (!event.relatedTarget || (event.relatedTarget && event.relatedTarget.id !== 'reservationPopup')) {
             planHideReservationPopup();
@@ -42,45 +36,24 @@ function changeFilm() {
     loadReservedSeats(currentFilm);
 }
 
-function loadReservedSeats(selectedFilm) {
+function loadReservedSeats() {
     const output = document.getElementById('reservationBox');
-    if (output !== null) {
-        output.innerHTML = ''; // Vyčištění obsahu divu před načtením nových rezervací
+    output.innerHTML = '';
 
-        const filmsSelect = document.getElementById('film');
-        const films = Array.from(filmsSelect.options).map(option => option.value);
-        
-        films.forEach(film => {
-            const filmReservations = JSON.parse(localStorage.getItem(film)) || [];
-
-            filmReservations.forEach(reservationInfo => {
-                displayReservation(reservationInfo);
-            });
+    const filmsSelect = document.getElementById('film');
+    const films = Array.from(filmsSelect.options).map(option => option.value);
+    
+    films.forEach(film => {
+        const filmReservations = JSON.parse(localStorage.getItem(film)) || [];
+        filmReservations.forEach(reservationInfo => {
+            displayReservation(reservationInfo);
         });
+    });
 
-        updateReservedSeats(selectedFilm);
-    } else {
-        console.error('Kontejner pro zobrazení rezervací nenalezen.');
-    }
+    const selectedFilm = document.getElementById('film').value;
+    updateReservedSeats(selectedFilm);
 }
 
-
-function loadAllReservedSeats() {
-    const output = document.getElementById('reservationBox');
-    if (output !== null) {
-        output.innerHTML = '';
-
-        const films = ['Matrix', 'HarryPotter', 'StarWars'];
-        films.forEach(film => {
-            const filmReservations = JSON.parse(localStorage.getItem(film)) || [];
-            filmReservations.forEach(reservationInfo => {
-                displayReservation(reservationInfo);
-            });
-        });
-    } else {
-        console.error('Kontejner pro zobrazení rezervací nenalezen.');
-    }
-}
 
 function createSeats(selectedFilm) {
     const seatsContainer = document.getElementById('seats');
@@ -98,7 +71,7 @@ function createSeats(selectedFilm) {
             seat.dataset.seatNumber = seatNumber;
             seat.textContent = 'S' + seatNumber;
             seat.addEventListener('click', function() {
-                toggleSeat(selectedFilm, seat);
+                toggleSeat(seat);
             });
             seat.addEventListener('mouseenter', function() {
                 displayReservationOnHover(selectedFilm, seat);
@@ -112,7 +85,7 @@ function createSeats(selectedFilm) {
     }
 }
 
-function toggleSeat(selectedFilm, seat) {
+function toggleSeat(seat) {
     if (!seat.classList.contains('reserved')) {
         seat.classList.toggle('selected');
     }
@@ -120,11 +93,24 @@ function toggleSeat(selectedFilm, seat) {
 
 reserveButton.onclick = function() {
     const selectedSeats = document.querySelectorAll('.selected');
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const firstName = firstNameInput.value;
+    const lastName = lastNameInput.value;
 
-    if (selectedSeats.length === 0 || !firstName || !lastName) {
-        alert('Vyberte alespoň jedno místo a vyplňte jméno a příjmení.');
+    if (selectedSeats.length === 0) 
+    {
+        alert('Vyberte alespoň jedno sedadlo');
+        return;
+    }
+    else if (!firstName)
+    {
+        alert('Vyplňte jméno');
+        return;
+    }
+    else if (!lastName)
+    {
+        alert('Vyplňte příjmení');
         return;
     }
 
@@ -139,6 +125,9 @@ reserveButton.onclick = function() {
 
     saveReservation(currentFilm, reservationInfo);
     displayReservation(reservationInfo);
+
+    firstNameInput.value = '';
+    lastNameInput.value = '';
 }
 
 function saveReservation(selectedFilm, reservationInfo) {
@@ -150,7 +139,8 @@ function saveReservation(selectedFilm, reservationInfo) {
     const selectedSeats = document.querySelectorAll('.reserved');
     selectedSeats.forEach(seat => {
         const seatNumber = seat.dataset.seatNumber;
-        if (!reservedSeats.includes(seatNumber)) {
+        if (!reservedSeats.includes(seatNumber)) 
+        {
             reservedSeats.push(seatNumber);
         }
     });
@@ -159,13 +149,9 @@ function saveReservation(selectedFilm, reservationInfo) {
 
 function displayReservation(reservationInfo) {
     const output = document.getElementById('reservationBox');
-    if (output !== null) {
-        const div = document.createElement('div');
-        div.innerText = reservationInfo;
-        output.appendChild(div);
-    } else {
-        console.error('Kontejner pro zobrazení rezervací nenalezen.');
-    }
+    const div = document.createElement('div');
+    div.innerText = reservationInfo;
+    output.appendChild(div);
 }
 
 function displayReservationPopup(x, y, fullName) {
@@ -177,10 +163,12 @@ function displayReservationPopup(x, y, fullName) {
 }
 
 function displayReservationOnHover(selectedFilm, seat) {
-    if (seat.classList.contains('reserved')) {
+    if (seat.classList.contains('reserved')) 
+    {
         const seatNumber = seat.dataset.seatNumber;
         const reservationInfo = JSON.parse(localStorage.getItem(selectedFilm)).find(reservation => reservation.includes('S' + seatNumber));
-        if (reservationInfo) {
+        if (reservationInfo) 
+        {
             const fullName = reservationInfo.split(' - ')[1].split(': ')[0];
             const rect = seat.getBoundingClientRect();
             const x = rect.left + window.pageXOffset;
@@ -189,13 +177,16 @@ function displayReservationOnHover(selectedFilm, seat) {
 
             clearTimeout(popupTimeout);
         }
-    } else {
+    } 
+    else 
+    {
         clearTimeout(popupTimeout);
     }
 }
 
 function planHideReservationPopup() {
-    if (!popupHovered) {
+    if (!popupHovered) 
+    {
         popupTimeout = setTimeout(function() {
             hideReservationPopup();
         }, 0);
@@ -213,9 +204,12 @@ function updateReservedSeats(selectedFilm) {
 
     allSeats.forEach(seat => {
         const seatNumber = seat.dataset.seatNumber;
-        if (reservedSeats.includes(seatNumber)) {
+        if (reservedSeats.includes(seatNumber)) 
+        {
             seat.classList.add('reserved');
-        } else {
+        } 
+        else 
+        {
             seat.classList.remove('reserved');
         }
     });
@@ -224,9 +218,12 @@ function updateReservedSeats(selectedFilm) {
 adminButton.onclick = function(){
     const adminPassword = prompt('Zadejte heslo administrátora:');
     
-    if (adminPassword === 'heslo') {
+    if (adminPassword === 'heslo') 
+    {
         window.location.href = 'admin.html';
-    } else {
+    } 
+    else 
+    {
         alert('Nesprávné heslo.');
     }
 }
