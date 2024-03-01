@@ -142,6 +142,9 @@ input {
     overflow-y: scroll; /* Změna na scroll pro vždy viditelný scrollbar */
 }
 
+#reservationBox > * {
+    padding-left: 10px;
+}
 
 #background{
   background-color: rgb(125, 243, 109);
