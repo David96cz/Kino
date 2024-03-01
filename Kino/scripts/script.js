@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', init);
 
 let reserveButton = document.getElementById('reserveButton');
-let resetButton = document.getElementById('resetButton');
 let adminButton = document.getElementById('adminPageBtn');
 
 let currentFilm = '';
@@ -220,17 +219,6 @@ function updateReservedSeats(selectedFilm) {
             seat.classList.remove('reserved');
         }
     });
-}
-
-resetButton.onclick = function() {
-    const adminPassword = prompt('Zadejte heslo administrátora:');
-    
-    if (adminPassword === 'heslo') {
-        localStorage.clear();
-        location.reload();
-    } else {
-        alert('Nesprávné heslo. Záznamy nebyly smazány.');
-    }
 }
 
 adminButton.onclick = function(){

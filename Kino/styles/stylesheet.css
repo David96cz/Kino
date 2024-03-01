@@ -76,13 +76,26 @@ input {
     height: 800px;
 }
 
+#outerBox{
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+}
+
 #adminBox {
     display: inline-flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     margin-bottom: 100px;
+    height: 200px;
 
+}
+
+#adminPageBtn{
+    background-color: grey;
+    color: white;
+    margin: 10px;
+    padding: auto;
+    cursor: pointer;
 }
 
 #deleteButton{
@@ -93,12 +106,12 @@ input {
     margin-top: 25px;
     width: 150px;
     height: 50px;
-    transition: background-color 0.3s ease; /* Přidání přechodové animace */
+    transition: background-color 0.3s ease;
     
 }
 
 #deleteButton:hover {
-    background-color: rgba(167, 0, 0, 255); /* Ztmavení barvy při najetí myší */
+    background-color: rgba(167, 0, 0, 255);
 }
 
 
@@ -108,6 +121,12 @@ input {
     height: 50px;
     margin-bottom: 25px;
     border-radius: 10px;
+    border-color: grey;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Přidání přechodové animace */
+}
+#backBtnIndex:hover {
+    background-color: rgb(128, 128, 128); /* Ztmavení barvy při najetí myší */
 }
 
 
@@ -115,13 +134,14 @@ input {
     background-color: rgb(243, 243, 243);
     border-radius: 20px;
     width: 560px;
-    min-height: 20px;
-    height: auto;
+    height: 75px;
     margin-top: 20px;
     margin-left: 20px;
     padding-top: 10px;
     padding-bottom: 25px;
+    overflow-y: scroll; /* Změna na scroll pro vždy viditelný scrollbar */
 }
+
 
 #background{
   background-color: rgb(125, 243, 109);
